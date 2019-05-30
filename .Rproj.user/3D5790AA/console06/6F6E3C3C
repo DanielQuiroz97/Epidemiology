@@ -1,0 +1,85 @@
+[K]0;cizquime@CIZ-quime: ~/Daniel/Parasitology[01;32mcizquime@CIZ-quime[00m:[01;34m~/Daniel/Parasitology[00m$ sudo R
+[sudo] password for cizquime: 
+Lo sentimos, vuelva a intentarlo.
+[sudo] password for cizquime: 
+
+R version 3.4.4 (2018-03-15) -- "Someone to Lean On"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R es un software libre y viene sin GARANTIA ALGUNA.
+Usted puede redistribuirlo bajo ciertas circunstancias.
+Escriba 'license()' o 'licence()' para detalles de distribucion.
+
+R es un proyecto colaborativo con muchos contribuyentes.
+Escriba 'contributors()' para obtener más información y
+'citation()' para saber cómo citar R o paquetes de R en publicaciones.
+
+Escriba 'demo()' para demostraciones, 'help()' para el sistema on-line de ayuda,
+o 'help.start()' para abrir el sistema de ayuda HTML con su navegador.
+Escriba 'q()' para salir de R.
+
+install.paBioconductor version 3.6 (BiocInstaller 1.28.0), ?biocLite for help
+A new version of Bioconductor is available after installing the most recent
+  version of R; see http://bioconductor.org/install
+Hi Daniel, welcome to R!
+> install.packages()')')g')g')a')l')u')[1P')l')u')v')i')a')l')
+Installing package into ‘/home/cizquime/R/x86_64-pc-linux-gnu-library/3.4’
+(as ‘lib’ is unspecified)
+probando la URL 'https://cloud.r-project.org/src/contrib/ggalluvial_0.6.0.tar.gz'
+Content type 'application/x-gzip' length 574374 bytes (560 KB)
+==================================================
+downloaded 560 KB
+
+Bioconductor version 3.6 (BiocInstaller 1.28.0), ?biocLite for help
+A new version of Bioconductor is available after installing the most recent
+  version of R; see http://bioconductor.org/install
+Hi Daniel, welcome to R!
+* installing *source* package ‘ggalluvial’ ...
+** package ‘ggalluvial’ successfully unpacked and MD5 sums checked
+** R
+** data
+** inst
+** preparing package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+Bioconductor version 3.6 (BiocInstaller 1.28.0), ?biocLite for help
+A new version of Bioconductor is available after installing the most recent
+  version of R; see http://bioconductor.org/install
+Hi Daniel, welcome to R!
+* DONE (ggalluvial)
+
+The downloaded source packages are in
+	‘/tmp/RtmpshnqjB/downloaded_packages’
+[K]0;cizquime@CIZ-quime: ~/Daniel/Parasitology[01;32mcizquime@CIZ-quime[00m:[01;34m~/Daniel/Parasitology[00m$ sudo p[Kapt-get update
+[sudo] password for cizquime: 
+0% [Trabajando]               Obj:1 http://security.ubuntu.com/ubuntu artful-security InRelease
+0% [Esperando las cabeceras]0% [1 InRelease gpgv 83,2 kB] [Esperando las cabeceras]                                                       Ign:2 http://cran.rstudio.com/bin/linux/ubuntu artful/ InRelease
+                                                       0% [1 InRelease gpgv 83,2 kB]                             0% [Esperando las cabeceras]                            Des:3 http://cran.rstudio.com/bin/linux/ubuntu artful/ Release [3.065 B]
+0% [3 Release 3.065 B/3.065 B 100%]                                   0% [Trabajando]               Des:4 http://cran.rstudio.com/bin/linux/ubuntu artful/ Release.gpg [473 B]
+0% [4 Release.gpg 473 B/473 B 100%]                                   0% [Trabajando]0% [4 Release.gpg gpgv 3.065 B]                               0% [Trabajando]0% [Trabajando]0% [Trabajando]0% [Trabajando]0% [Trabajando]0% [Trabajando]0% [Trabajando]0% [Trabajando]0% [Trabajando]0% [Conectando a ec.archive.ubuntu.com (200.236.31.4)]                                                      Obj:5 http://ec.archive.ubuntu.com/ubuntu artful InRelease
+                                                      0% [Trabajando]0% [5 InRelease gpgv 237 kB] [Esperando las cabeceras]                                                      0% [Esperando las cabeceras]                            Obj:6 http://ec.archive.ubuntu.com/ubuntu artful-updates InRelease
+                            0% [Trabajando]0% [6 InRelease gpgv 88,7 kB] [Esperando las cabeceras]                                                       0% [Esperando las cabeceras]                            Obj:7 http://ec.archive.ubuntu.com/ubuntu artful-backports InRelease
+                            0% [Trabajando]0% [7 InRelease gpgv 74,6 kB]                                        589 B/s 0s100% [Trabajando]                                                    589 B/s 0s                                                                               Descargados 3.538 B en 6s (582 B/s)
+Leyendo lista de paquetes... 0%Leyendo lista de paquetes... 0%Leyendo lista de paquetes... 1%Leyendo lista de paquetes... 4%Leyendo lista de paquetes... 4%Leyendo lista de paquetes... 8%Leyendo lista de paquetes... 8%Leyendo lista de paquetes... 9%Leyendo lista de paquetes... 9%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 12%Leyendo lista de paquetes... 41%Leyendo lista de paquetes... 41%Leyendo lista de paquetes... 47%Leyendo lista de paquetes... 71%Leyendo lista de paquetes... 71%Leyendo lista de paquetes... 75%Leyendo lista de paquetes... 75%Leyendo lista de paquetes... 91%Leyendo lista de paquetes... 91%Leyendo lista de paquetes... 92%Leyendo lista de paquetes... 92%Leyendo lista de paquetes... 92%Leyendo lista de paquetes... 92%Leyendo lista de paquetes... 92%Leyendo lista de paquetes... 92%Leyendo lista de paquetes... 92%Leyendo lista de paquetes... 92%Leyendo lista de paquetes... 94%Leyendo lista de paquetes... 94%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 95%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 96%Leyendo lista de paquetes... 97%Leyendo lista de paquetes... 97%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 98%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... 99%Leyendo lista de paquetes... Hecho
+]0;/home/cizquime/Daniel/Parasitology]0;cizquime@CIZ-quime: ~/Daniel/Parasitology[01;32mcizquime@CIZ-quime[00m:[01;34m~/Daniel/Parasitology[00m$ sudo apt-get full-upgrade -y
+Leyendo lista de paquetes... 0%Leyendo lista de paquetes... 100%Leyendo lista de paquetes... Hecho
+Creando árbol de dependencias... 0%Creando árbol de dependencias... 0%Creando árbol de dependencias... 50%Creando árbol de dependencias... 50%Creando árbol de dependencias       
+Leyendo la información de estado... 0%Leyendo la información de estado... 0%Leyendo la información de estado... Hecho
+Calculando la actualización... 0%Calculando la actualización... 10%Calculando la actualización... Hecho
+Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.
+  linux-headers-4.13.0-37 linux-headers-4.13.0-37-generic
+  linux-headers-4.13.0-38 linux-headers-4.13.0-38-generic
+  linux-image-4.13.0-37-generic linux-image-4.13.0-38-generic
+  linux-image-extra-4.13.0-37-generic linux-image-extra-4.13.0-38-generic
+Utilice «sudo apt autoremove» para eliminarlos.
+0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 0 no actualizados.
+[K]0;cizquime@CIZ-quime: ~/Daniel/Parasitology[01;32mcizquime@CIZ-quime[00m:[01;34m~/Daniel/Parasitology[00m$ rm tmp.png 
+]0;/home/cizquime/Daniel/Parasitology]0;cizquime@CIZ-quime: ~/Daniel/Parasitology[01;32mcizquime@CIZ-quime[00m:[01;34m~/Daniel/Parasitology[00m$ [K]0;cizquime@CIZ-quime: ~/Daniel/Parasitology[01;32mcizquime@CIZ-quime[00m:[01;34m~/Daniel/Parasitology[00m$ tmp pn[K[K[K[K[K[Krm tmp.png 
+[K]0;cizquime@CIZ-quime: ~/Daniel/Parasitology[01;32mcizquime@CIZ-quime[00m:[01;34m~/Daniel/Parasitology[00m$ pwd
+/home/cizquime/Daniel/Parasitology
+]0;/home/cizquime/Daniel/Parasitology]0;cizquime@CIZ-quime: ~/Daniel/Parasitology[01;32mcizquime@CIZ-quime[00m:[01;34m~/Daniel/Parasitology[00m$ 

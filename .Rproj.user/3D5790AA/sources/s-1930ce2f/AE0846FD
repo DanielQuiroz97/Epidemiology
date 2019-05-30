@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1559193565201.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AE0846FD",
+    "lastKnownWriteTime" : 94323163470112,
+    "last_content_update" : 1559193565201,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "73244DCD",
+        "caption" : "cleanDB2",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=cleanDB2&cache_key=73244DCD",
+        "displayedObservations" : 13115,
+        "environment" : "",
+        "expression" : "cleanDB2",
+        "object" : "cleanDB2",
+        "preview" : 0,
+        "totalObservations" : 13115,
+        "variables" : 12
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
