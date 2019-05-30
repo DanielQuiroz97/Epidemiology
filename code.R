@@ -77,7 +77,7 @@ cleanDB <- ParasitologyDB %>%
                                    '>18|<45')) ) %>% 
   mutate(PATIENT_y = factor(PATIENT_y, # Transform age into categorical data
                             levels = c('>65','>18|<45', '<18'))) %>% 
-  filter( !(CODE %in% c('B829', 'B89X', 'A085', "A09X")) ) %>% 
+  filter( !(CODE %in% c('B829', 'B89X', 'A085')) ) %>% 
           # SEX != ' INTERSEXUAL') # Remove not parasitic disease
   mutate(SEX = ifelse(SEX %in% " HOMBRE", "MEN",
                          ifelse(SEX %in% " MUJER", "WOMEN", "Unknown")))
