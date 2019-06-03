@@ -74,20 +74,13 @@ cleanDB <- ParasitologyDB %>%
          DIS_NAME = ifelse(is.na(DIS_NAME), 'NA', DIS_NAME),
          PATIENT_y = ifelse(PATIENT_y < 18, '<18', # Categorize data
                             ifelse(PATIENT_y > 65, '>65',
-                                   '18-45')) ) %>% 
+                                   '>18|<45')) ) %>% 
   mutate(PATIENT_y = factor(PATIENT_y, # Transform age into categorical data
-                            levels = c('>65','18-45', '<18'))) %>% 
-  filter( !(CODE %in% c('B829', 'B89X', 'A085', "A09X")) ) %>% 
-          # SEX != ' INTERSEXUAL') # Remove not parasitic disease
+                            levels = c('>65','>18|<45', '<18'))) %>% 
+  filter( !(CODE %in% c('B829', 'B89X', 'A085')) ) %>% 
+  # SEX != ' INTERSEXUAL') # Remove not parasitic disease
   mutate(SEX = ifelse(SEX %in% " HOMBRE", "MEN",
-                         ifelse(SEX %in% " MUJER", "WOMEN", "Unknown"))) %>% 
-  mutate(CAN = ifelse(CAN == ' ARCHIDONA', 'Archidona', 
-                      ifelse(CAN == ' TENA', 'Tena', 
-                             ifelse(CAN == ' QUIJOS', 'Quijos',
-                                    ifelse(CAN == " EL CHACO", 
-                                           'El Chaco', 'C. J. A Tola'))))) %>% 
-  mutate(CAN = factor(CAN, levels = c("Quijos", "El Chaco", "C. J. A Tola",
-                                      "Archidona","Tena") ))
+                      ifelse(SEX %in% " MUJER", "WOMEN", "Unknown")))
 
 cleanDB2 <- left_join(cleanDB, uni_dis, phylum,by = 'CODE') %>% 
   mutate(CODE = factor(CODE)) %>% 
@@ -103,50 +96,56 @@ cleanDB2 <- left_join(cleanDB, uni_dis, phylum,by = 'CODE') %>%
 
 
 #### First Plot ####
-first_plot <-  cleanDB %>% group_by(CAN, CODE, YEAR) %>% 
+first_plot <-  cleanDB %>% filter(!(CODE %in% 'A09X')) %>% 
+  group_by(CAN, CODE, YEAR) %>% 
   summarise(N = n()) %>% group_by(YEAR, CAN) %>% 
   mutate(Cumulative = N/sum(N) ) %>% 
   arrange(YEAR) %>% 
-  filter(Cumulative > 0.08) %>% ungroup()
-
+  filter(Cumulative > 0.08) %>% ungroup() %>% 
+  mutate(CAN =  ifelse(CAN == ' ARCHIDONA', 'Archidona', 
+                       ifelse(CAN == ' TENA', 'Tena', 
+                              ifelse(CAN == ' QUIJOS', 'Quijos',
+                                     ifelse(CAN == " EL CHACO", "El Chaco",
+                                            'C.J.A. Tola'))))) %>% 
+   mutate(CAN = factor(CAN, levels = c('Quijos', "El Chaco",'C.J.A. Tola',
+                                       'Archidona', 'Tena' )))
 
 # Plot
-Figure1 <- first_plot %>% 
-  ggplot(aes(CAN, Cumulative, fill = CODE)) +
+( Figure1 <- first_plot %>% ggplot(aes(CAN, Cumulative, fill = CODE)) +
   geom_bar(stat = 'identity', position = 'fill') +
   theme_bw() +
   facet_grid(.~YEAR, scales = 'free_y', 
              switch = "y", space = "free_y") +
-  theme(axis.text.x  = element_text(angle = 45, hjust = 1)) +
+  theme(axis.text.x  = element_text(angle = 35, hjust = 1)) +
   scale_fill_manual(values = col_vector[seq(15)]) +
   xlab('County') + ylab("Disease prevalence [%]") +
-  labs(fill = "WHO\ncode")
+  labs(fill = "WHO\ncode") )
 
 ExportPlot(gplot = Figure1, filename = 'Figure2', width = 8, height = 5.5)
 
 #### Second Plot ####
-second_plot <- cleanDB %>% group_by(CAN, CODE, YEAR, PATIENT_y, SEX) %>% 
+second_plot <- cleanDB %>%  filter(!(CODE %in% 'A09X')) %>% 
+  group_by(CAN, CODE, YEAR, PATIENT_y, SEX) %>% 
   summarise(N = n()) %>% group_by(YEAR, CAN, PATIENT_y, SEX) %>% 
   mutate(Cumulative = N/sum(N)) %>% 
   arrange(YEAR) %>% 
   filter(Cumulative > 0.35) 
 
 
-Figure2 <- second_plot %>% as.data.frame %>% 
+( Figure2 <- second_plot %>% as.data.frame %>% filter(!(CODE %in% 'A09X')) %>% 
   ggplot(aes(weight = Cumulative, axis1 = CAN, axis3 = SEX, axis2 = PATIENT_y)) +
   geom_alluvium(aes(fill = CODE), width = 1/24, ribbon_bend = 1/5) +
-  geom_stratum(width = 1/8, fill = "white", color = "grey40") +
-  ggrepel::geom_text_repel(stat = "stratum", label.strata = TRUE,
-                           size = 3, nudge_x = .35) +
+  geom_stratum(width = 1/8, fill = "black", color = "grey") +
+  geom_label(stat = "stratum", label.strata = TRUE, size = 2.5) +
   scale_x_continuous(breaks = 1:3, labels = c("County", "Age", "Sex")) +
-  scale_fill_brewer(type = "qual", palette = "Paired") +
+    scale_fill_manual(values = rev(col_vector[seq(11)]) ) +
   facet_wrap('YEAR', scales = 'free', nrow = 3, ncol = 2) +
   labs(fill = "WHO\ncode") +
   theme_bw() + theme( axis.ticks.x=element_blank(), 
                       axis.ticks.y=element_blank(),
-                      axis.text.y=element_blank()) 
+                      axis.text.y=element_blank())  )
 
-Figure2
+
 ExportPlot(gplot = Figure2, filename = 'Figure3', width = 10, height = 5.5)
 
 ## For zoonotic plot
@@ -173,25 +172,19 @@ fourth_plot <- cleanDB2 %>% mutate(TROPISM = factor(TROPISM),
   mutate(CUMULATIVE = N/sum(N)) %>% 
   arrange(YEAR) %>% 
   filter(CUMULATIVE > 0.04) %>% 
-  filter(!is.na(Phylum)) %>% 
-  mutate(TROPISM = ifelse(TROPISM == 5, "Digestive",
-                          ifelse(TROPISM == 11, 'Intergumentary', "Other")) )
+  filter(!is.na(Phylum))
 
 Figure3 <- fourth_plot %>% as.data.frame %>% 
   ggplot(aes(weight = CUMULATIVE,  axis1 = TROPISM, axis2 = Phylum,
              axis3 = ZOONOTIC)) +
   geom_alluvium(aes(fill = CODE), width = 1/24, ribbon_bend = 1/5) +
-  geom_stratum(width = 1/8, fill = "white", color = "grey40") +
-  ggrepel::geom_text_repel(stat = "stratum", label.strata = TRUE,
-                           size = 2.75, nudge_x = .35) +
-  scale_x_continuous(breaks = 1:3,
-                     labels = c("Tropism\n(System)", "Phylum", 'Zoonotic')) +
+  geom_stratum(width = 1/8, fill = "black", color = "grey") +
+  geom_label(stat = "stratum", label.strata = TRUE, size = 2.5) +
+  scale_x_continuous(breaks = 1:3, labels = c("Tropism", "Phylum", 'Zoonotic')) +
   facet_wrap('YEAR', scales = 'free', nrow = 3, ncol = 2) +
   scale_fill_manual(values = col_vector[seq(13)]) +
   theme_bw() + theme( axis.ticks.x=element_blank(), 
                       axis.ticks.y=element_blank(),
-                      axis.text.y=element_blank()) +
-  labs(fill = "WHO\ncode") 
+                      axis.text.y=element_blank()) 
 
-Figure3
-ExportPlot(gplot = Figure3, filename = 'Figure4', width = 8.5, height = 5.5)# Load Needed libraries
+ExportPlot(gplot = Figure3, filename = 'Figure4', width = 8.5, height = 5.5)
