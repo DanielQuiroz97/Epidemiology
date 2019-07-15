@@ -36,6 +36,9 @@ ExportPlot <- function(gplot, filename, width=2, height=1.5) {
   png(file = paste0("Plots/",filename, '.png'), width = width * 100, height = height * 100)
   print(gplot)
   dev.off()
+  jpeg(file = paste0("Plots/",filename, '.jpg'), width = width * 100, height = height * 100)
+  print(gplot)
+  dev.off()
 }
 
 #### Data Treatment ####
@@ -74,9 +77,9 @@ cleanDB <- ParasitologyDB %>%
          DIS_NAME = ifelse(is.na(DIS_NAME), 'NA', DIS_NAME),
          PATIENT_y = ifelse(PATIENT_y < 18, '<18', # Categorize data
                             ifelse(PATIENT_y > 65, '>65',
-                                   '18-45')) ) %>% 
+                                   '18-65')) ) %>% 
   mutate(PATIENT_y = factor(PATIENT_y, # Transform age into categorical data
-                            levels = c('>65','18-45', '<18'))) %>% 
+                            levels = c('>65','18-65', '<18'))) %>% 
   filter( !(CODE %in% c('B829', 'B89X', 'A085', "A09X")) ) %>% 
           # SEX != ' INTERSEXUAL') # Remove not parasitic disease
   mutate(SEX = ifelse(SEX %in% " HOMBRE", "MEN",
@@ -112,7 +115,7 @@ first_plot <-  cleanDB %>% group_by(CAN, CODE, YEAR) %>%
 
 # Plot
 Figure1 <- first_plot %>% 
-  ggplot(aes(CAN, Cumulative, fill = CODE)) +
+  ggplot(aes(CAN, PERCENT, fill = CODE)) +
   geom_bar(stat = 'identity', position = 'fill') +
   theme_bw() +
   facet_grid(.~YEAR, scales = 'free_y', 
@@ -133,7 +136,7 @@ second_plot <- cleanDB %>% group_by(CAN, CODE, YEAR, PATIENT_y, SEX) %>%
 
 
 Figure2 <- second_plot %>% as.data.frame %>% 
-  ggplot(aes(weight = Cumulative, axis1 = CAN, axis3 = SEX, axis2 = PATIENT_y)) +
+  ggplot(aes(weight = PERCENT, axis1 = CAN, axis3 = SEX, axis2 = PATIENT_y)) +
   geom_alluvium(aes(fill = CODE), width = 1/24, ribbon_bend = 1/5) +
   geom_stratum(width = 1/8, fill = "white", color = "grey40") +
   ggrepel::geom_text_repel(stat = "stratum", label.strata = TRUE,
@@ -147,7 +150,9 @@ Figure2 <- second_plot %>% as.data.frame %>%
                       axis.text.y=element_blank()) 
 
 Figure2
-ExportPlot(gplot = Figure2, filename = 'Figure3', width = 10, height = 5.5)
+ggsave(filename =  "Figure2.jpg", plot = Figure2, path = "./Plots",
+       width = 6, height = 5, units = "in", dpi = 350, scale = 1.5)
+#ExportPlot(gplot = Figure2, filename = 'Figure3', width = 10, height = 5.5)
 
 ## For zoonotic plot
 third_plot <- cleanDB2 %>% group_by(CAN, YEAR, ZOONOTIC)%>% 
@@ -194,4 +199,6 @@ Figure3 <- fourth_plot %>% as.data.frame %>%
   labs(fill = "WHO\ncode") 
 
 Figure3
+ggsave(filename =  "Figure3.jpg", plot = Figure3, path = "./Plots",
+       width = 6, height = 5, units = "in", dpi = 350, scale = 1.5)
 ExportPlot(gplot = Figure3, filename = 'Figure4', width = 8.5, height = 5.5)# Load Needed libraries
